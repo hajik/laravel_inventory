@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\temp_admin\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,6 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/temp', function() {
-    return view('layouts.temp_admin.master');
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::resource('categories', CategoriesController::class);
 });
+//categories

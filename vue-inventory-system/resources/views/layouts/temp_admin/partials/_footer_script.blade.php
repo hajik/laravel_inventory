@@ -11,4 +11,37 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('temp_admin/build/js/custom.min.js') }}"></script>
+
+{{-- sweetalert --}}
+<script src="{{ asset('temp_admin/vendors/sweetalert/sweetalert.min.js') }}"></script>
+
+<script>
+
+    $('div.alert.alert-success').not('.alert-important').delay(3000).fadeOut(350);
+
+    $('.sa-delete').on('click', function() {
+        
+        let form_id = $(this).data('form-id');
+
+        swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this category!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    // swal("Poof! Your category has been deleted!", {
+                    // icon: "success",
+                    // });
+                    $('#'+form_id).submit();
+                } else {
+                    swal("Your category is safe!");
+                }
+            });
+    });
+
+</script>
+
 @stack('js')
