@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\temp_admin\CategoriesController;
 use \App\Http\Controllers\temp_admin\BrandsController;
 use \App\Http\Controllers\temp_admin\SizesController;
+use \App\Http\Controllers\temp_admin\ProductsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +33,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::resource('brands', BrandsController::class);
     //sizes
     Route::resource('sizes', SizesController::class);
+    //products
+    Route::resource('products', ProductsController::class);
 });

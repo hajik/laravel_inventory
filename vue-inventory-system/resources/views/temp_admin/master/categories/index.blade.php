@@ -56,11 +56,11 @@
                                         <i class="fa fa-edit"></i>
                                         Edit
                                     </a>&nbsp;
-                                    <a href="javascript:;" class="sa-delete" data-form-id="category-delete-{{ $v->id }}">
+                                    <a href="javascript:;" class="sa-delete" data-form-id="categories-delete-{{ $v->id }}">
                                         <i class="fa fa-trash"></i>
                                         Delete
                                     </a>
-                                    <form method="POST" action="{{ route('categories.destroy', $v->id) }}" id="category-delete-{{ $v->id }}">
+                                    <form method="POST" action="{{ route('categories.destroy', $v->id) }}" id="categories-delete-{{ $v->id }}">
                                         @csrf
                                         @method('DELETE')
                                     </form>

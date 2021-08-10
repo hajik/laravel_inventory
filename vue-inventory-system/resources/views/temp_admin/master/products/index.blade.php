@@ -4,20 +4,19 @@
     <div class="col-md-12 col-sm-12  ">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Master</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Brands</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Products</a></li>
             </ol>
         </nav>
         <div class="x_panel">
             <div class="x_title">
-                <h2>List Brands</h2>
+                <h2>List Products</h2>
                 <div class="clearfix"></div>
             </div>
 
             <div class="x_content">
-                <a href="{{ route('brands.create') }}" class="btn btn-sm btn-success">
+                <a href="{{ route('products.create') }}" class="btn btn-sm btn-success">
                     <i class="fa fa-plus"></i>
-                    Add Brand {{$brands}}
+                    Add Product
                 </a>
 
                 <div class="table-responsive">
@@ -27,7 +26,7 @@
                         <th>
                             <input type="checkbox" id="check-all" class="flat">
                         </th>
-                        <th class="column-title">Name </th>
+                        <th class="column-title">Size </th>
                         <th class="column-title">Created At </th>
                         <th class="column-title no-link last"><span class="nobr">Action</span>
                         </th>
@@ -38,7 +37,7 @@
                     </thead>
 
                     <tbody>
-                        @forelse ($brands as $key => $v)
+                        @forelse ($products as $key => $v)
                         <tr class="even pointer">
                             <td class="a-center ">
                                 <input type="checkbox" class="flat" name="table_records">
@@ -50,15 +49,15 @@
                                     <i class="fa fa-eye"></i>
                                     View
                                 </a>&nbsp;
-                                <a href="{{ route('brands.edit', $v->id) }}">
+                                <a href="{{ route('products.edit', $v->id) }}">
                                     <i class="fa fa-edit"></i>
                                     Edit
                                 </a>&nbsp;
-                                <a href="javascript:;" class="sa-delete" data-form-id="brands-delete-{{ $v->id }}">
+                                <a href="javascript:;" class="sa-delete" data-form-id="products-delete-{{ $v->id }}">
                                     <i class="fa fa-trash"></i>
                                     Delete
                                 </a>
-                                <form method="POST" action="{{ route('brands.destroy', $v->id) }}" id="brands-delete-{{ $v->id }}">
+                                <form method="POST" action="{{ route('products.destroy', $v->id) }}" id="products-delete-{{ $v->id }}">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -74,7 +73,7 @@
                     </tbody>
                     </table>
                     <div class="col-md-12 text-center" style="font-size: 10px !important;">
-                        {!! $brands->links() !!}
+                        {!! $products->links() !!}
                     </div>
                 </div>
                     
