@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\temp_admin\CategoriesController;
+use \App\Http\Controllers\temp_admin\BrandsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum'])->group(function(){
+    //categories
     Route::resource('categories', CategoriesController::class);
+    //categories
+    Route::resource('brands', BrandsController::class);
 });
-//categories

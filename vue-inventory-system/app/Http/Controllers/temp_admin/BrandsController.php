@@ -4,9 +4,11 @@ namespace App\Http\Controllers\temp_admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\temp_admin\Category;
+use App\Models\temp_admin\Brand;
 
-class CategoriesController extends Controller
+use App\Classes\MD5Hasher;
+
+class BrandsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +17,12 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::
-        orderby('created_at','DESC')
+        $brands = Brand::
+        select('id','name','created_at')
+        ->orderby('created_at','DESC')
         ->paginate(10);
 
-        return view('temp_admin.master.categories.index', compact('categories'));
+        return view('temp_admin.master.brands.index', compact('brands'));
     }
 
     /**
@@ -29,7 +32,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('temp_admin.master.categories.create');
+        return view('temp_admin.master.brands.create');
     }
 
     /**
@@ -41,17 +44,15 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:2|max:50|unique:categories',
+            'name' => 'required|min:2|max:50|unique:brands',
         ]);
     
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
+        $brand = new Brand();
+        $brand->name = $request->name;
+        $brand->save();
 
-        flash('Category created succefully!')->success();
-        return redirect()->route('categories.index');
-        // ->with('success','Category created successfully.');
-
+        flash('Brand created succefully!')->success();
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -73,8 +74,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('temp_admin.master.categories.edit', compact('category'));
+        $brand = Brand::findOrFail($id);
+        return view('temp_admin.master.brands.edit', compact('brand'));
     }
 
     /**
@@ -86,16 +87,16 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|min:2|max:50|unique:categories,name,'. $id
+         $this->validate($request, [
+            'name' => 'required|min:2|max:50|unique:brands,name,'. $id
         ]);
 
-        $category = Category::findOrfail($id);
-        $category->name = $request->name;
-        $category->save();
+        $brand = Brand::findOrfail($id);
+        $brand->name = $request->name;
+        $brand->save();
 
-        flash('Category updated succefully!')->success();
-        return redirect()->route('categories.index');
+        flash('Brand updated succefully!')->success();
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -106,12 +107,10 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrfail($id);
-        $category->delete();
-
+        $brand = Brand::findOrfail($id);
+        $brand->delete();
         
-        flash('Category deleted succefully!')->success();
-        return redirect()->route('categories.index');
-
+        flash('Brand deleted succefully!')->success();
+        return redirect()->route('brands.index');
     }
 }
