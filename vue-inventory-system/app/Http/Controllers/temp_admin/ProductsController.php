@@ -26,7 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('temp_admin.master.sizes.create');
+        return view('temp_admin.master.products.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:1|max:50|unique:sizes',
+            'name' => 'required|min:1|max:50|unique:products',
         ]);
     
         $size = new Size();
@@ -46,7 +46,7 @@ class ProductsController extends Controller
         $size->save();
 
         flash('Size created succefully!')->success();
-        return redirect()->route('sizes.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $size = Size::findOrFail($id);
-        return view('temp_admin.master.sizes.edit', compact('size'));
+        return view('temp_admin.master.products.edit', compact('size'));
     }
 
     /**
@@ -82,7 +82,7 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request, [
-            'name' => 'required|min:1|max:50|unique:sizes,name,'. $id
+            'name' => 'required|min:1|max:50|unique:products,name,'. $id
         ]);
 
         $size = Size::findOrfail($id);
@@ -90,7 +90,7 @@ class ProductsController extends Controller
         $size->save();
 
         flash('Size updated succefully!')->success();
-        return redirect()->route('sizes.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -105,6 +105,6 @@ class ProductsController extends Controller
         $size->delete();
         
         flash('Size deleted succefully!')->success();
-        return redirect()->route('sizes.index');
+        return redirect()->route('products.index');
     }
 }

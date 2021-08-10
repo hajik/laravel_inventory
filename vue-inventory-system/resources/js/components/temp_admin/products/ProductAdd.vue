@@ -9,12 +9,11 @@
             <form method="POST" action="" class="form-horizontal form-label-left">
                 <div class="form-group row">
                     <label class="control-label col-md-2" for="name">
-                        Product
+                        Category
                         <span class="text-danger">*</span>
                     </label>
                     <div class="col-md-7">
-                        <input type="text" name="name" id="name" placeholder="Enter product" required="required"
-                            class="form-control form-control-sm" />
+                        <Select2 v-model="form.category_id" :options="categories" :settings="{ placeholder: 'Select Category'}"></Select2>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -34,6 +33,30 @@
     </div>
 </template>
 
-export default{
+<script>
 
-} 
+    import store from '../store'
+    import * as actions from '../store/action-types'
+    import { mapGetters } from 'vuex'
+    import Select2 from 'v-select2-component';
+
+    export default{
+        components: {Select2}, //declare select2
+        data(){
+            return {
+                form: {
+                    category_id : 0
+                }
+            }
+        },
+        computed: {
+            ...mapGetters({
+                'categories': 'getCategories'
+            })
+        },
+        mounted() {
+            // Get categories
+            store.dispatch(actions.GET_CATEGORIES)
+        },
+    }
+</script>

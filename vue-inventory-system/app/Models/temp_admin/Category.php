@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $table = 'categories';
-    protected $fillable = [
-        'name', 'created_at', 'updated_at'
-    ];
+    
+    // protected $table = 'categories';
+    // protected $fillable = [
+    //     'name', 'created_at', 'updated_at'
+    // ];
+    
+    protected $appends = ['text'];
+
+    public function getTextAttribute() {
+        return $this->name;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\temp_admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\temp_admin\Category;
 
 class CategoriesController extends Controller
@@ -114,4 +115,15 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index');
 
     }
+
+    //handle ajax request
+    public function getCategoriesJson(){
+        $categories = Category::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $categories,
+        ], Response::HTTP_OK);
+    }
+
 }

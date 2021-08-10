@@ -7,8 +7,6 @@ Vue.component('product-add', require('./components/temp_admin/products/ProductAd
 
 import store from './components/temp_admin/store'
 
-// Vue.component('product-add', require('./components/temp_admin/products/ProductAdd').default)
-
 const app = new Vue({
     el: '#app',
     store
