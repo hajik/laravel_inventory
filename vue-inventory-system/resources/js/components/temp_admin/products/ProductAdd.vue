@@ -8,7 +8,7 @@
             <br />
             <form method="POST" action="" class="form-horizontal form-label-left">
                 <div class="form-group row">
-                    <label class="control-label col-md-2" for="name">
+                    <label class="control-label col-md-2" for="">
                         Category
                         <span class="text-danger">*</span>
                     </label>
@@ -17,12 +17,21 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="control-label col-md-2" for="">
+                        Brand
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-7">
+                        <Select2 v-model="form.brand_id" :options="brands" :settings="{ placeholder: 'Select Brands'}"></Select2>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-3 col-sm-3 offset-md-2">
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="fa fa-save"></i>
                             Submit
                         </button>
-                        <a href="" class="btn btn-sm btn-secondary">
+                        <a href="/products" class="btn btn-sm btn-secondary">
                             Back
                             <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         </a>
@@ -45,18 +54,22 @@
         data(){
             return {
                 form: {
-                    category_id : 0
+                    category_id : 0,
+                    brand_id: 0
                 }
             }
         },
         computed: {
             ...mapGetters({
-                'categories': 'getCategories'
+                'categories': 'getCategories',
+                'brands': 'getBrands'
             })
         },
         mounted() {
             // Get categories
             store.dispatch(actions.GET_CATEGORIES)
+            // Get brands
+            store.dispatch(actions.GET_BRANDS)
         },
     }
 </script>

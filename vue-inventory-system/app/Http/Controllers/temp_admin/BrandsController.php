@@ -4,6 +4,7 @@ namespace App\Http\Controllers\temp_admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\temp_admin\Brand;
 
 use App\Classes\MD5Hasher;
@@ -113,4 +114,15 @@ class BrandsController extends Controller
         flash('Brand deleted succefully!')->success();
         return redirect()->route('brands.index');
     }
+
+    //handle ajax request
+    public function getBrandsJson(){
+        $brands = Brand::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $brands,
+        ], Response::HTTP_OK);
+    }
+
 }
