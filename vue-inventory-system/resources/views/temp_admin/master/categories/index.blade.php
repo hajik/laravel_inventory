@@ -20,6 +20,8 @@
                     Add Category
                 </a>
 
+                <example-component></example-component>
+
                 <div class="table-responsive">
                     <table class="table table-sm table-striped jambo_table bulk_action">
                     <thead>
